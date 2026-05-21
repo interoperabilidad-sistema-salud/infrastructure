@@ -60,7 +60,7 @@ resource "aws_lambda_function" "delivery" {
 
   # Máximo 10 ejecuciones simultáneas
   # Protege a las EPS destino de oleadas
-  reserved_concurrent_executions = 10
+  reserved_concurrent_executions = 5
 
   environment {
     variables = {

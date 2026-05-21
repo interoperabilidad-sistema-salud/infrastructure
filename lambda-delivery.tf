@@ -49,8 +49,8 @@ resource "aws_lambda_function" "delivery" {
   function_name = "${var.project_name}-delivery-${var.environment}"
   role          = aws_iam_role.lambda_delivery_role.arn
 
-  filename         = "${path.module}/../dist/lambda-delivery.zip"
-  source_code_hash = filebase64sha256("${path.module}/../dist/lambda-delivery.zip")
+  s3_bucket = var.artifact_bucket
+  s3_key    = "lambda-delivery/latest.zip"
 
   handler = "src/index.handler"
   runtime = "nodejs22.x"

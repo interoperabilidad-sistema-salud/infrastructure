@@ -1,0 +1,45 @@
+# .github/workflows/ci.yml
+name: CI — Infrastructure
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.0"
+
+      - name: Configurar credenciales AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Descarga el provider de AWS y prepara el directorio de trabajo
+      - name: Terraform Init
+        run: terraform init
+
+      # Verifica que la sintaxis de todos los .tf es correcta
+      # No se conecta a AWS — es validación offline
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Verifica formato consistente (indentación, espaciado)
+      # Falla si algún archivo no está formateado
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      # Muestra qué recursos se crearían/cambiarían/destruirían
+      # SÍ se conecta a AWS (por eso necesita las credenciales)
+      # -no-color: para que los logs en GitHub se lean

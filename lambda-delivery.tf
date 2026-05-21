@@ -56,7 +56,7 @@ resource "aws_lambda_function" "delivery" {
   runtime = "nodejs22.x"
 
   memory_size = 256
-  timeout     = 120   # 2 minutos (entrega puede tardar)
+  timeout     = 120 # 2 minutos (entrega puede tardar)
 
   # Máximo 10 ejecuciones simultáneas
   # Protege a las EPS destino de oleadas
@@ -75,6 +75,6 @@ resource "aws_lambda_function" "delivery" {
 resource "aws_lambda_event_source_mapping" "sqs_triggers_delivery" {
   event_source_arn = aws_sqs_queue.delivery.arn
   function_name    = aws_lambda_function.delivery.arn
-  batch_size       = 5       # Hasta 5 mensajes por invocación
+  batch_size       = 5 # Hasta 5 mensajes por invocación
   enabled          = true
 }

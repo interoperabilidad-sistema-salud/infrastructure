@@ -52,7 +52,7 @@ resource "aws_lambda_function" "delivery" {
   filename         = "${path.module}/../dist/lambda-delivery.zip"
   source_code_hash = filebase64sha256("${path.module}/../dist/lambda-delivery.zip")
 
-  handler = "src/handlers/delivery.handler.handler"
+  handler = "src/index.handler"
   runtime = "nodejs22.x"
 
   memory_size = 256

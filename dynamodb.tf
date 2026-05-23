@@ -7,7 +7,7 @@
 resource "aws_dynamodb_table" "transfers" {
   name         = "${var.project_name}-transfers-${var.environment}"
   billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "tranferId"
+  hash_key     = "transferId"
 
   attribute {
     name = "transferId"

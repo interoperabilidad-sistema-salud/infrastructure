@@ -66,7 +66,7 @@ resource "aws_lambda_function" "delivery" {
   s3_bucket = var.artifact_bucket
   s3_key    = "lambda-delivery/latest.zip"
 
-  handler = "src/index.handler"
+  handler = "src/handler.handler"
   runtime = "nodejs22.x"
 
   memory_size = 256
@@ -74,7 +74,7 @@ resource "aws_lambda_function" "delivery" {
 
   # Máximo 10 ejecuciones simultáneas
   # Protege a las EPS destino de oleadas
-  reserved_concurrent_executions = 5
+  reserved_concurrent_executions = -1
 
   environment {
     variables = {

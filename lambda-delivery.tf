@@ -39,6 +39,20 @@ resource "aws_iam_role_policy" "delivery_policy" {
           "sqs:GetQueueAttributes"
         ]
         Resource = aws_sqs_queue.delivery.arn
+      },
+      {
+        # DynamoDB: createTrasladoRecord + updateTrasladoEstado
+        Effect = "Allow"
+        Action = [
+          "dynamodb:PutItem",
+          "dynamodb:GetItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:Query"
+        ]
+        Resource = [
+          aws_dynamodb_table.transfers.arn,
+          "${aws_dynamodb_table.tranferes.arn}/index/*"
+        ]
       }
     ]
   })

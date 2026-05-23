@@ -25,17 +25,17 @@ output "lambda_delivery_name" {
 }
 
 # ===== DYNAMODB =====
-output "dynamodb_traslados_table" {
+output "dynamodb_transfers_table" {
   description = "Nombre de la tabla DynamoDB de traslados"
   value       = aws_dynamodb_table.tranfers.name
 }
 
-output "dynamodb_traslados_arn" {
+output "dynamodb_transfers_arn" {
   description = "ARN de la tabla de traslados"
   value       = aws_dynamodb_table.tranfers.arn
 }
 
-output "dynamodb_catalogo_table" {
+output "dynamodb_catalog_table" {
   description = "Nombre de la tabla DynamoDB de catálogo EPS"
   value       = aws_dynamodb_table.catalog_eps.name
 }

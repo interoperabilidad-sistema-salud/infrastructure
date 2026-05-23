@@ -41,7 +41,7 @@ resource "aws_iam_role_policy" "ingest_policy" {
         ]
         Resource = [
           aws_dynamodb_table.transfers.arn,
-          "${aws_dynamodb_table.tranferes.arn}/index/*"
+          "${aws_dynamodb_table.tranfers.arn}/index/*"
         ]
       },
       {

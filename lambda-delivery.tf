@@ -51,7 +51,7 @@ resource "aws_iam_role_policy" "delivery_policy" {
         ]
         Resource = [
           aws_dynamodb_table.transfers.arn,
-          "${aws_dynamodb_table.tranfers.arn}/index/*"
+          "${aws_dynamodb_table.transfers.arn}/index/*"
         ]
       }
     ]

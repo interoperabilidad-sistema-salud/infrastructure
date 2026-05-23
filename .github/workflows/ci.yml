@@ -3,9 +3,9 @@ name: CI — Infrastructure
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, staging, develop]
   pull_request:
-    branches: [main, develop]
+    branches: [main, staging, develop]
 
 jobs:
   validate:
